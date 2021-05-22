@@ -4,13 +4,17 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.util.Calendar;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
 
@@ -41,6 +45,11 @@ public class Cliente {
 	@Column(name = "cli_fechaUltimaCompra")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate fechaUltimaCompra;
+	
+	@Autowired
+	@OneToOne (cascade = CascadeType.ALL)
+	@JoinColumn(name = "cta_id")
+	private Cuenta cuenta;
 	
 	public Cliente() {
 		// TODO Auto-generated constructor stub
