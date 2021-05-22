@@ -5,17 +5,33 @@ package ar.edu.unju.fi.tp6.model;
 
 import java.time.LocalDate;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import org.springframework.stereotype.Component;
+
 /**
  * @author Error404
  *
  */
+@Component("cuentaObj")
+@Entity
+@Table(name = "cuentas")
 public class Cuenta {
-	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "cta_id")
 	private Long id; 
+	@Column(name = "cta_saldo")
 	private double saldo;
+	@Column(name = "cta_fechaCreacion")
 	private LocalDate fechaCreacion;// (LocalDate) Se ingresa en el formulario
+	@Column(name = "cta_estado")
 	private String estado;//(String) -> ACTIVA, INACTIVA
- 
 	/**
 	 * 
 	 */
