@@ -1,9 +1,11 @@
 package ar.edu.unju.fi.tp6.service.imp;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import ar.edu.unju.fi.tp6.model.Producto;
@@ -15,7 +17,10 @@ public class ProductoServiceImp implements IProductoService{
 
 	private static final Log LOGGER = LogFactory.getLog(ProductoServiceImp.class);
 	
-	private List<Producto> productoList;
+	private List<Producto> productoList = new ArrayList<Producto>();
+	
+	@Autowired
+	private Producto producto;
 	
 	@Override
 	public void generarTablaProducto() {
@@ -49,7 +54,7 @@ public class ProductoServiceImp implements IProductoService{
 	}
 
 	@Override
-	public Producto getProductoPorCodigo(int codigo, int cantidad) {
+	public Producto updateStockPorCodigo(Long codigo, int cantidad) {
 		Producto p = new Producto();
 		for (Producto prod : productoList) {
 			if(prod.getCodigo() == codigo) {
@@ -59,6 +64,24 @@ public class ProductoServiceImp implements IProductoService{
 		}
 		return p;
 	}
+
+	@Override
+	public Producto getProducto() {
+		return producto;
+	}
+
+	@Override
+	public void eliminarProducto(Long codigo) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Producto getProductoPorCodigo(Long codigo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 	
 }

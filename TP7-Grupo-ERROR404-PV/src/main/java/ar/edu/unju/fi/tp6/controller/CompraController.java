@@ -61,7 +61,7 @@ public class CompraController {
 		}
 		
 		
-		Producto producto = productoService.getProductoPorCodigo(compra.getProducto().getCodigo(), compra.getCantidad());
+		Producto producto = productoService.updateStockPorCodigo(compra.getProducto().getCodigo(), compra.getCantidad());
 		compra.setProducto(producto);
 		
 		if (compraService.obtenerCompras() == null) {
