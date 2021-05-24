@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -15,25 +16,20 @@ import ar.edu.unju.fi.tp6.service.IProductoService;
 @Controller
 public class ProductoController {
 	@Autowired
-	@Qualifier("productoUtilService")
+	@Qualifier("productoServiceMysql")
 	private IProductoService productoService;
 	
-	@Autowired
-	@Qualifier("productoObj")
-	private Producto producto;
 	
 	@GetMapping("/producto/nuevo")
 	public String getNuevoProductoPage(Model model) {
-		model.addAttribute(producto);
+		model.addAttribute("producto", productoService.getProducto());
 		return "nuevoproducto";
 	}
 	
 	@PostMapping("/producto/guardar")
 	public ModelAndView agregarProductoPage(@ModelAttribute("producto")Producto producto) {
 		ModelAndView model = new ModelAndView("productos");
-		if (productoService.obtenerProductos() == null) {
-			productoService.generarTablaProducto();
-		}
+		
 		productoService.agregarProducto(producto);
 		
 		model.addObject("producto", productoService.obtenerProductos());
@@ -43,9 +39,7 @@ public class ProductoController {
 	@GetMapping("/producto/ultimo")
 	public ModelAndView ultimoProductoPage() {
 		ModelAndView modelView = new ModelAndView("ultimoproducto");
-		if(productoService.obtenerProductos() == null) {
-			productoService.generarTablaProducto();
-		}
+		
 		modelView.addObject("producto", productoService.ultimoProducto());
 		
 		return modelView;
@@ -54,12 +48,30 @@ public class ProductoController {
 	@GetMapping("/producto/listado")
 	public ModelAndView getProductosPage(){
 		ModelAndView model = new ModelAndView("productos");
-		if(productoService.obtenerProductos() == null) {
-			productoService.generarTablaProducto();
-		}
+		
 		
 		model.addObject("producto", productoService.obtenerProductos());
 		return model;
 	}
+	
+	@GetMapping("/producto/editar/{codigo}")
+	public ModelAndView getProductoEditPage(@PathVariable(value = "codigo")Long codigo) {
+		ModelAndView model = new ModelAndView("nuevoproducto");
+		Producto producto = productoService.getProductoPorCodigo(codigo);
+		model.addObject("producto", producto);
+		
+		
+		return model;
+	}
+	
+	@GetMapping("/producto/eliminar/{codigo}")
+	public ModelAndView getProductoDeletePage(@PathVariable(value = "codigo")Long codigo) {
+		ModelAndView model = new ModelAndView("redirect:/producto/listado");
+		productoService.eliminarProducto(codigo);
+		
+		return model;
+	}
+	
+	
 	
 }
