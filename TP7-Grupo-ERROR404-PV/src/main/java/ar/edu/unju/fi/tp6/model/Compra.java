@@ -1,5 +1,9 @@
 package ar.edu.unju.fi.tp6.model;
 
+import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -8,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,13 +24,18 @@ import org.springframework.stereotype.Component;
 @Table(name = "compras")
 public class Compra {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "com_id")
-	private int id ;
+	private Long id ;
+	
+	@OneToMany(mappedBy = "compra")
+	private List<Producto> productos = new ArrayList<Producto>();
+	
 	@Autowired
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "pro_codigo", nullable = false)
 	private Producto producto ;
+	
 	@Column(name = "com_cantidad", nullable =  false)
 	private int cantidad ;
 
@@ -42,27 +52,24 @@ public class Compra {
 	 * @param cantidad
 	 * @param total
 	 */
-	public Compra(int id, Producto producto, int cantidad) {
+	public Compra(Long id, Producto producto, int cantidad) {
 		super();
 		this.id = id;
 		this.producto = producto;
 		this.cantidad = cantidad;
 
 	}
-	@Override
-	public String toString() {
-		return "Compra [id=" + id + ", producto=" + producto + ", cantidad=" + cantidad + "]";
-	}
+	
 	/**
 	 * @return the id
 	 */
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 	/**
 	 * @param id the id to set
 	 */
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	/**
@@ -92,13 +99,35 @@ public class Compra {
 	/**
 	 * @return the total
 	 */
-	public double getTotal(double precio) {
-		double total = 0;
+	public String getTotal(double precio) {
+		String total = "";
+
+		DecimalFormat df = new DecimalFormat("#.##");
 		
-		total = this.cantidad * precio;
+		total =df.format(this.cantidad * precio);
 		
 		return total;
 	}
+
+
+	public List<Producto> getProductos() {
+		return productos;
+	}
+
+
+	public void setProductos(List<Producto> productos) {
+		this.productos = productos;
+	}
+
+
+	@Override
+	public String toString() {
+		return "Compra [id=" + id + ", productos=" + productos + ", producto=" + producto + ", cantidad=" + cantidad
+				+ "]";
+	}
+
+
+	
 	
 	
  
