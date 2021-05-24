@@ -30,6 +30,10 @@
 									<th>Precio</th>
 									<th>Cantidad</th>
 									<th>Total</th>
+									
+								
+									<th>Acciones </th>
+									
 								</tr>
 							</thead>
 							<tbody>
@@ -42,7 +46,11 @@
 									<td th:text="${comp.producto.getPrecio}"></td>
 									<td th:text="${comp.cantidad}"></td>
 									<td th:text="'$' + ${comp.getTotal(comp.producto.getPrecio)}"></td>
-									
+								
+									<td>
+										<a th:href="@{/compra/editar/}+${comp.id}" class="btn btn-warning">Editar</a>
+										<a th:href="@{/compra/eliminar/}+${comp.id}" class="btn btn-danger">Eliminar</a>
+									</td>
 								</tr> 
 							</tbody>
 						
