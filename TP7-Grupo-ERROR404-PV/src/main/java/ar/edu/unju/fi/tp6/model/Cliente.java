@@ -26,9 +26,11 @@ public class Cliente {
 	@Column(name = "cli_tipoDocumento")
 	private String tipoDocumento;
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "cli_id")
+	private Long id;
 	@Column(name = "cli_nroDocumento")
-	private int nroDocumento;
+	private Long nroDocumento;
 	@Column(name = "cli_nombreApellido")
 	private String nombreApellido;
 	@Column(name = "cli_email")
@@ -47,17 +49,18 @@ public class Cliente {
 	private LocalDate fechaUltimaCompra;
 	
 	@Autowired
-	@OneToOne (cascade = CascadeType.ALL)
-	@JoinColumn(name = "cta_id")
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "cta_id", nullable = false)
 	private Cuenta cuenta;
 	
+		
 	public Cliente() {
 		// TODO Auto-generated constructor stub
 	}
 	
 	
 	
-	public Cliente(String tipoDocumento, int nroDocumento, String nombreApellido, String email, String password,
+	public Cliente(String tipoDocumento, Long id, Long nroDocumento, String nombreApellido, String email, String password,
 			LocalDate fechaNacimiento, int codigoAreaTelefono, int nroTelefono, LocalDate fechaUltimaCompra) {
 		super();
 		this.tipoDocumento = tipoDocumento;
@@ -81,11 +84,11 @@ public class Cliente {
 		this.tipoDocumento = tipoDocumento;
 	}
 
-	public int getNroDocumento() {
+	public Long getNroDocumento() {
 		return nroDocumento;
 	}
 
-	public void setNroDocumento(int nroDocumento) {
+	public void setNroDocumento(Long nroDocumento) {
 		this.nroDocumento = nroDocumento;
 	}
 
@@ -197,13 +200,45 @@ public class Cliente {
 		return texto;
 	}
 	
+	
+	public Cuenta getCuenta() {
+		return cuenta;
+	}
+
+
+
+	public void setCuenta(Cuenta cuenta) {
+		this.cuenta = cuenta;
+	}
+
+
+
+	public Long getId() {
+		return id;
+	}
+
+
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+
+
 	@Override
 	public String toString() {
-		return "Cliente [tipoDocumento=" + tipoDocumento + ", nroDocumento=" + nroDocumento + ", nombreApellido="
-				+ nombreApellido + ", email=" + email + ", password=" + password + ", fechaNacimiento="
-				+ fechaNacimiento + ", codigoAreaTelefono=" + codigoAreaTelefono + ", nroTelefono="
-				+ nroTelefono + ", fechaUltimaCompra=" + fechaUltimaCompra + "]";
+		return "Cliente [tipoDocumento=" + tipoDocumento + ", id=" + id + ", nroDocumento=" + nroDocumento
+				+ ", nombreApellido=" + nombreApellido + ", email=" + email + ", password=" + password
+				+ ", fechaNacimiento=" + fechaNacimiento + ", codigoAreaTelefono=" + codigoAreaTelefono
+				+ ", nroTelefono=" + nroTelefono + ", fechaUltimaCompra=" + fechaUltimaCompra + ", cuenta=" + cuenta
+				+ "]";
 	}
+
+
+
+	
+	
+	
 
 	
 }

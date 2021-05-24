@@ -19,7 +19,7 @@ public class CompraServiceImp implements ICompraService{
 	@Override
 	public void generarTablaCompra() {
 		compraList = TablaCompra.listaCompras;
-		compraList.add(new Compra(1, new Producto(1,"Procesador Core i9",298999.99,"INTEL",100),1));
+		compraList.add(new Compra(1L, new Producto(1L,"Procesador Core i9",298999.99,"INTEL",100),1));
 		LOGGER.info("METHOD: generarTablaCompra - creo primera compra por defecto" + compraList.get(compraList.size()-1));
 
 	}
