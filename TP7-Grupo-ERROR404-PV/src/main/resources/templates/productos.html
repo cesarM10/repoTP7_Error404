@@ -25,6 +25,9 @@
 							<th>Precio</th>
 							<th>Marca</th>
 							<th>Stock</th>
+							
+							<!-- NUEVO TP7 -->
+							<th>Acciones </th>
 						</tr>
 					</thead>
 					<tbody>
@@ -33,7 +36,14 @@
 							<td th:text="${p.nombre}"></td>
 							<td th:text="${p.precio}"></td>
 							<td th:text="${p.marca}"></td>
-							<td th:text="${p.stock}"></td>						
+							<td th:text="${p.stock}"></td>
+							
+							<!-- NUEVO TP7 -->
+							<td>
+								<a th:href="@{/producto/editar/}+${p.codigo}" class="btn btn-warning">Editar</a>
+								<a th:href="@{/producto/eliminar/}+${p.codigo}" class="btn btn-danger">Eliminar</a>
+							</td>
+													
 						</tr> 
 					</tbody>
 				
