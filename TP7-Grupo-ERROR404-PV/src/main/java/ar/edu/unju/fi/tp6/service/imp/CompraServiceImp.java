@@ -1,9 +1,12 @@
 package ar.edu.unju.fi.tp6.service.imp;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import ar.edu.unju.fi.tp6.model.Compra;
@@ -14,7 +17,10 @@ import ar.edu.unju.fi.tp6.util.TablaCompra;
 @Service("compraUtilService")
 public class CompraServiceImp implements ICompraService{
 	private static final Log LOGGER = LogFactory.getLog(CompraServiceImp.class);
-	private List<Compra> compraList;
+	private List<Compra> compraList = new ArrayList<Compra>();
+	
+	@Autowired
+	private Compra compra;
 	
 	@Override
 	public void generarTablaCompra() {
@@ -36,6 +42,23 @@ public class CompraServiceImp implements ICompraService{
 		LOGGER.info("METHOD: obtenerCompras - se recupero la lista de Objeto Compra");
 
 		return compraList;
+	}
+
+	@Override
+	public Compra getCompra() {
+		return compra;
+	}
+
+	@Override
+	public Optional<Compra> getCompraPorId(Long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void eliminarCompra(Long id) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
