@@ -15,14 +15,17 @@
 				<div class="col-sm-12 col-md" style="border: solid;"> 
 					<h1 style="font-family: century gothic">Alta de una nueva compra</h1>
 					<form th:action="@{/compra/guardar}" th:object="${compra}" method="post" >
-						<!-- Ingreso ID -->
+						<!-- Ingreso ID 
 						<div class="form-group row">
 						    <label for="id" class="col-sm-2 col-form-label">ID compra</label>
 						    <div class="col-sm-10">
 						      <input type="number" class="form-control" id="id" th:field="*{id}" >
 						    </div>
-						</div>
+						</div>-->
 						
+						<input type="hidden" th:field="*{id}">
+						
+												
 						<!-- Ingreso Producto -->
 						<div class="form-group ">
 							<label for="producto" class="col-sm-2 col-form-label">Producto</label>

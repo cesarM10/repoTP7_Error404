@@ -9,9 +9,15 @@ public interface IProductoService {
 	
 	public void agregarProducto(Producto producto);
 	
+	public Producto getProducto();
+	
 	public Producto ultimoProducto();
 	
 	public List<Producto> obtenerProductos();
 	
-	public Producto getProductoPorCodigo(int codigo, int cantidad);
+	public Producto updateStockPorCodigo(Long codigo, int cantidad);
+	
+	public Producto getProductoPorCodigo(Long codigo);
+	
+	public void eliminarProducto(Long codigo);
 }

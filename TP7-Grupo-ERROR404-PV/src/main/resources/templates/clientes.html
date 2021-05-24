@@ -24,8 +24,12 @@
 						<table class="table table-responsive table-hover" style="text-align: center; background-color: gray; color: white;">
 							<thead style="background-color: black;"> 
 								<tr id="miTablaEncabezado">
-									<th>Tip Doc</th>
+									
+									
 									<th>Nro Doc</th>
+									
+									<th>Tip Doc</th>
+									
 									<th>N y Ap </th>
 									<th>E-mail</th>
 									<th>Password</th>
@@ -36,13 +40,25 @@
 									<th>T. Ult. compra</th>
 									<th>T.F. de Nac.</th>
 									<th>T. prox. cumple</th>
+									
+									<th>ID Cuenta</th>
+									<th>Saldo</th>
+									<th>Fecha Creacion</th>
+									<th>Estado</th>
+									
+									
+									<th>Acciones </th>
 																	
 								</tr>
 							</thead>
 							<tbody>
 								<tr id="miTablaContenido" th:each = "cli:${cliente}">
-									<td th:text="${cli.tipoDocumento}"></td>
+									
+									
+									
 									<td th:text="${cli.nroDocumento}"></td>
+									<td th:text="${cli.tipoDocumento}"></td>
+									
 									<td th:text="${cli.nombreApellido}"></td>
 									<td th:text="${cli.email}"></td>
 									<td th:text="${cli.password}"></td>
@@ -53,8 +69,18 @@
 									
 									<td th:text="${cli.calculoTiempoUltimaCompra}"></td>
 									<td th:text="${cli.calculoTiempoDesdeNacimiento} + ' dias'"></td>
-									<td th:text="${cli.calculoTiempoHastaCumple}"></td>																		
+									<td th:text="${cli.calculoTiempoHastaCumple}"></td>		
 									
+									<td th:text="${cli.cuenta.id}"></td>
+									<td th:text="${cli.cuenta.saldo}"></td>
+									<td th:text="${#temporals.format(cli.cuenta.fechaCreacion,'dd/MM/yyyy')}"> </td>
+									<td th:text="${cli.cuenta.estado}"> </td>																
+									
+									
+									<td>
+										<a th:href="@{/cliente/editar/}+${cli.id}" class="btn btn-warning">Editar</a>
+										<a th:href="@{/cliente/eliminar/}+${cli.id}" class="btn btn-danger">Eliminar</a>
+									</td>
 									
 								</tr> 
 							</tbody>

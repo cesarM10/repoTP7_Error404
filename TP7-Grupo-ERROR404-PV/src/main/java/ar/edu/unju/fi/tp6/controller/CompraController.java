@@ -54,7 +54,6 @@ public class CompraController {
 		
 		
 		
-		LOGGER.info("Metodo: guardar --"+compra);
 		Producto producto = productoService.updateStockPorCodigo(compra.getProducto().getCodigo(), compra.getCantidad());
 		compra.setProducto(producto);
 		LOGGER.info("PASA O NO PASA --"+compra);
