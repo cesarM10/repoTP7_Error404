@@ -20,6 +20,9 @@
 				
 						<form th:action="@{/cliente/guardar}" method="post" th:object="${cliente}" >
 							
+							<input type="hidden" th:field="*{id}"> 
+							<input type="hidden" th:field="*{cuenta.id}">	
+							
 							<div class="form-group ">
 							<label for="tipoDocumento">Tipo de Documento</label>
 						    <select class="form-control" id="tipoDocumento" th:field="*{tipoDocumento}">
@@ -82,8 +85,32 @@
 							    </div>
 							</div>
 							
+							<!-- Nuevo TP7 -->
+							<div class="form-group row">
+							    <label for="saldo" class="col-sm-2 col-form-label">Saldo</label>
+							    <div class="col-sm-10">
+							      <input type="number" class="form-control" id="saldo" th:field="*{cuenta.saldo}" step="0.01" >
+							    </div>
+							</div>	
+							
+							<div class="form-group row">
+							    <label for="fechaCreacion" class="col-sm-2 col-form-label">Fecha de Creacion</label>
+							    <div class="col-sm-10">
+							      <input type="date" class="form-control" id="fechaCreacion" th:field="*{cuenta.fechaCreacion}">
+							    </div>
+							</div>
+							
+							<div class="form-group ">
+							<label for="estado">Estado de cuenta</label>
+						    <select class="form-control" id="estado" th:field="*{cuenta.estado}">
+						      <option value="" selected>Seleccione </option>
+						      <option value="Activo">Activa</option>
+						      <option value="Inactivo">Inactiva</option>
+						    </select>
+							</div>
+							
 																
-							<button type="submit" class="btn btn-primary btn-sm">Enviar</button>
+							<button type="submit" class="btn btn-primary btn-sm">Guardar</button>
 						
 						</form>
 				</div>

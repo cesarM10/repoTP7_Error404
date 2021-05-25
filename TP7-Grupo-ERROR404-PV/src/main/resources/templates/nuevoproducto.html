@@ -11,15 +11,11 @@
 			<div class="container">
 				<div class="row col-sm-12 col-md">
 					<div class="col-sm12 col-md" style="border: solid;">
-						<h1 style="font-family: century gothic">Alta de un nuevo producto</h1>
+						<h1 style="font-family: century gothic">Alta de un nuevo producto </h1>
 						<form th:action="@{/producto/guardar}" th:object="${producto}" method="post">
 							
-							<div class="form-group row">
-							    <label for="codigo" class="col-sm-2 col-form-label">Codigo</label>
-							    <div class="col-sm-10">
-							      <input type="number" class="form-control" id="codigo" th:field="*{codigo}" >
-							    </div>
-							</div>
+							<input type="hidden" th:field="*{codigo}">
+							
 							
 							<div class="form-group row">
 							    <label for="nombre" class="col-sm-2 col-form-label">Nombre del Producto</label>
